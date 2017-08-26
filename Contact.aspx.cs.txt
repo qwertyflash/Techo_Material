@@ -1,0 +1,47 @@
+﻿using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
+using System.Collections;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+
+public partial class Contact : System.Web.UI.Page
+{
+    SqlConnection con = new SqlConnection();
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        TextBox5.Focus();
+    }
+    
+
+    protected void Send_Click(object sender, EventArgs e)
+    {
+        SqlConnection con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
+        con.Open();
+
+        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("insert into contact(stname,stemail,stsub,stmsg) values('" + TextBox5.Text + "','" + TextBox6.Text + "','" + TextBox7.Text + "','" + TextBox8.Text + "')", con);
+        int i = 0;
+        i = cmd.ExecuteNonQuery();
+        
+
+        TextBox5.Text = "";
+        TextBox6.Text = "";
+        TextBox7.Text = "";
+        TextBox8.Text = "";
+        
+    }
+    protected void TextBox8_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void TextBox5_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+}
